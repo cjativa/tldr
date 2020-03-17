@@ -1,0 +1,41 @@
+.profile-body {
+  width: 600px;
+  min-height: 700px;
+
+  border: $border__transparent;
+  border-radius: $border_radius;
+
+  margin: auto;
+
+  display: grid;
+  grid-template-rows: 90px 1fr 90px;
+  justify-content: center;
+
+  .content {
+    width: 450px;
+    grid-row: 2;
+
+    p {
+      margin: 18px 0px;
+    }
+
+    &__passions,
+    &__skills {
+      column-count: 3;
+    }
+  }
+}
+
+.fade-in {
+  transition: opacity 1s ease-in;
+  opacity: 100%;
+}
+
+.fade-out {
+  transition: opacity 1s ease-out;
+  opacity: 0%;
+}
+
+.faded {
+  opacity: 0%;
+}

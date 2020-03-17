@@ -1,0 +1,18 @@
+@import "./variables.scss";
+@import "./imports.scss";
+
+body {
+  font-family: $font;
+  background-color: white;
+}
+
+p {
+    margin: 0;
+}
+
+body,
+html, #root,
+.app {
+  height: 100%;
+  width: 100%;
+}
