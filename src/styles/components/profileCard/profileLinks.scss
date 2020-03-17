@@ -3,3 +3,30 @@
   grid-template-columns: repeat(4, 1fr);
   width: 120px;
 }
+
+.hover-icon {
+  overflow: hidden;
+  position: relative;
+
+  .hidden-value {
+    left: -900px;
+    position: absolute;
+    width: 100px;
+  }
+
+  &:hover {
+    display: grid;
+    grid-template-columns: min-content 300px;
+    position: relative;;
+
+    & .hidden-value {
+      animation: slideIn 0.25s forwards;
+
+      @keyframes slideIn {
+        100% {
+          left: 0;
+        }
+      }
+    }
+  }
+}

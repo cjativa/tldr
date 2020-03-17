@@ -72,12 +72,12 @@
 
 .unfocus {
   transition-property: transform;
-  transition-duration: 1s;
+  transition-duration: 0.8s;
   transform: translateY(calc(-50vh + 150px));
 }
 
 .focus {
   transition-property: transform;
-  transition-duration: 1s;
+  transition-duration: 0.8s;
   transform: translateY(0px);
 }
