@@ -4,7 +4,6 @@
   width: 400px;
   padding: 10px 8px;
   box-sizing: border-box;
-  overflow: hidden;
 
   // Colors
   background-color: white;
@@ -33,6 +32,8 @@
   &__lower {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    position: relative;
+    overflow-x: hidden;
   }
 
   &__picture {
