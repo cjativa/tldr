@@ -1,32 +1,29 @@
 .profile-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  width: 120px;
+  grid-template-columns: repeat(4, min-content);
+  column-gap: 12px;
 }
 
 .hover-icon {
+  display: flex;
+  justify-content: space-between;
   overflow: hidden;
   position: relative;
 
   .hidden-value {
-    left: -900px;
-    position: absolute;
-    width: 100px;
+    background-color: red;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    position: fixed;
+    z-index: 2;
+    transition: width 0.5s ease;
   }
 
-  &:hover {
-    display: grid;
-    grid-template-columns: min-content 300px;
-    position: relative;;
-
-    & .hidden-value {
-      animation: slideIn 0.25s forwards;
-
-      @keyframes slideIn {
-        100% {
-          left: 0;
-        }
-      }
-    }
+  &:hover .hidden-value {
+    margin-left: 25px;
+    width: fit-content;
+    z-index: 5;
+    visibility: visible;
   }
 }
