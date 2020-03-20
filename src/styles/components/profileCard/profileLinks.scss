@@ -6,12 +6,11 @@
 
 .hover-icon {
   display: inline-block;
-  width: auto;
   overflow: hidden;
   position: relative;
 
   .hidden-value {
-    background-color: red;
+    background-color: white;
     display: inline-block;
     width: 0%;
     overflow: hidden;
