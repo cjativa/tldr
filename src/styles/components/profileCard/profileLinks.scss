@@ -5,25 +5,26 @@
 }
 
 .hover-icon {
-  display: flex;
-  justify-content: space-between;
+  display: inline-block;
+  width: auto;
   overflow: hidden;
   position: relative;
 
   .hidden-value {
     background-color: red;
-    width: 0;
-    white-space: nowrap;
+    display: inline-block;
+    width: 0%;
     overflow: hidden;
+    margin-left: 10px;
+
+    transition: width 0.3s ease-in-out;
+
     position: fixed;
     z-index: 2;
-    transition: width 0.5s ease;
   }
 
   &:hover .hidden-value {
-    margin-left: 25px;
-    width: fit-content;
+    width: 100%;
     z-index: 5;
-    visibility: visible;
   }
 }
