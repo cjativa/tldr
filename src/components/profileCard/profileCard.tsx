@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { ProfileLinks } from './profileLinks';
+import { ProfileLinks, ProfileLocation } from './profileLinks';
 
 const firstName = 'Christopher';
 const middleName = 'Daniel';
@@ -87,10 +85,7 @@ export const ProfileCard = (props) => {
             {/** Profile card lower section */}
             <div className="profile-card__lower">
                 <ProfileLinks connections={connections} />
-                <div className="lower__location">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} />
-                    <p className="profile-card__location">{location}</p>
-                </div>
+                <ProfileLocation location={location} />
             </div>
         </div>
     )

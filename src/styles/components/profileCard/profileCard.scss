@@ -55,16 +55,6 @@
   &__headline {
   }
 
-  .lower__location {
-    display: grid;
-    grid-template-columns: min-content max-content;
-    column-gap: 6px;
-    justify-content: end;
-  }
-  &__location {
-    text-align: right;
-  }
-
   // Starting at the middle of the page
   position: relative;
   z-index: 1;

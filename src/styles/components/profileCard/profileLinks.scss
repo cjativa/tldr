@@ -4,22 +4,54 @@
   column-gap: 12px;
 }
 
-.hover-icon {
-  display: inline-block;
-  overflow: hidden;
+.profile-location {
+}
+
+.hover-container.left {
+  display: flex;
+  flex-direction: row;
 
   .hidden-value {
-    background-color: white;
-    display: inline-block;
     width: 0%;
+    display: inline-block;
+    transition: width 0.5s ease-in;
+
     overflow: hidden;
-    margin-left: 10px;
-    transition: width 0.5s ease-in-out;
+    white-space: nowrap;
+
     position: absolute;
     z-index: 2;
+
+    margin-left: 25px;
+    background-color: white;
   }
 
-  &:hover .hidden-value {
+  .hover-icon:hover + .hidden-value {
     width: 100%;
+  }
+}
+
+.hover-container.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  .hover-icon {
+    width: 20px;
+    text-align: left;
+  }
+
+  .hidden-value {
+    overflow: hidden;
+    white-space: nowrap;
+
+    z-index: 2;
+
+    flex-basis: 0;
+    transition: flex-basis 0.6s ease-in;
+  }
+
+  .hover-icon:hover + .hidden-value  {
+    flex-basis: 108px;
   }
 }

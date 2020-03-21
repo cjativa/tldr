@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { faEnvelope, faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhoneAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const HoverableIcon = (props) => {
 
-    const { value, icon } = props;
+    const { value, icon, displaceRight } = props;
+    const positionStyle = displaceRight ? 'right' : 'left';
+
+    const [expand, setExpand] = useState(false);
+
+    const toggleExpand = () => {
+        setExpand(!expand);
+    }
+
+    const expandClass = (expand) ? 'expand' : 'not-expand';
 
     return (
-        <div className="hover-icon">
-            <FontAwesomeIcon icon={icon} />
-            <div className="hidden-value">{value}</div>
-        </div>
+        <div className={`hover-container ${positionStyle}`}>
+            <div className={`hover-icon`}><FontAwesomeIcon icon={icon} /></div>
+            <div className={`hidden-value ${expandClass}`}>{value}</div>
+        </div >
     )
 }
 
@@ -35,7 +44,17 @@ export const ProfileLinks = (props: any) => {
 
             {/** GitHub icon link */}
             {gitHub && <HoverableIcon icon={faGithub} value={gitHub} />}
-
         </div>
     );
+}
+
+export const ProfileLocation = (props: any) => {
+
+    const { location } = props;
+
+    return (
+        <div className="profile-location">
+            <HoverableIcon icon={faMapMarkerAlt} value={location} displaceRight={true} />
+        </div>
+    )
 }
