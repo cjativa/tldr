@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { faEnvelope, faPhoneAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -10,18 +10,13 @@ const HoverableIcon = (props) => {
     const { value, icon, displaceRight } = props;
     const positionStyle = displaceRight ? 'right' : 'left';
 
-    const [expand, setExpand] = useState(false);
-
-    const toggleExpand = () => {
-        setExpand(!expand);
-    }
-
-    const expandClass = (expand) ? 'expand' : 'not-expand';
+    const spanRef = useRef(null);
+    const [spanWidth, setSpanWidth] = useState(0);
 
     return (
         <div className={`hover-container ${positionStyle}`}>
-            <div className={`hover-icon`}><FontAwesomeIcon icon={icon} /></div>
-            <div className={`hidden-value ${expandClass}`}>{value}</div>
+            <div className={`hover-icon`} onMouseEnter={() => setSpanWidth(spanRef.current.offsetWidth)}><FontAwesomeIcon onMouseLeave={() => setTimeout(() => setSpanWidth(0), 200)} icon={icon} /></div>
+            <div className={`hidden-value`} style={{ width: spanWidth }}><span style={{ width: spanWidth }} ref={spanRef}>{value}</span></div>
         </div >
     )
 }

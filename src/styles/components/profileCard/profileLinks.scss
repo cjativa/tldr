@@ -14,7 +14,7 @@
   .hidden-value {
     width: 0%;
     display: inline-block;
-    transition: width 0.5s ease-in;
+    transition: width 0.5s ease-in-out;
 
     overflow: hidden;
     white-space: nowrap;
@@ -24,10 +24,6 @@
 
     margin-left: 25px;
     background-color: white;
-  }
-
-  .hover-icon:hover + .hidden-value {
-    width: 100%;
   }
 }
 
@@ -47,11 +43,6 @@
 
     z-index: 2;
 
-    flex-basis: 0;
-    transition: flex-basis 0.6s ease-in;
-  }
-
-  .hover-icon:hover + .hidden-value  {
-    flex-basis: 108px;
+    transition: width 0.6s ease-in;
   }
 }
