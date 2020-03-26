@@ -7,9 +7,8 @@ export const Profile = () => {
 
     const [cardFocused, setCardFocus] = useState(null);
 
-    const onCardClick = (cardFocused: boolean) => {
-        setCardFocus(cardFocused);
-    }
+    const onCardClick = (cardFocused: boolean) => setCardFocus(cardFocused);
+
 
     return (
         <div className="profile">

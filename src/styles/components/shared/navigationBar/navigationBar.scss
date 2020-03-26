@@ -1,0 +1,16 @@
+.navigation-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px 40px;
+  
+  border: $border__transparent;
+
+  &__logo {
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: end;
+  }
+}
