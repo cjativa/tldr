@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, useHistory, Redirect, useLocation } from 'react-router-dom';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faKey } from '@fortawesome/free-solid-svg-icons';
+import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useEnterPress } from '../../shared/customHooks';
@@ -9,39 +9,77 @@ import { useEnterPress } from '../../shared/customHooks';
 export const SignUp = () => {
 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(null);
+    const [password, setPassword] = useState('');
 
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     const history = useHistory();
+    const location = useLocation();
 
-    const next = (caller: string, data) => {
+    const [submitState, setSubmit] = useState(false);
 
-        switch (caller) {
+    const onChange = (event) => {
+
+        const { value, name } = event.target;
+
+        switch (name) {
             case 'email':
-                setEmail(data.email);
-                history.push('/sign-up/password');
+                setEmail(value);
                 break;
 
             case 'password':
-                setPassword(data.password);
-                history.push('/sign-up/name');
+                setPassword(value);
                 break;
 
-            case 'name':
-                setFirstName(data.firstName);
-                setLastName(data.lastName);
+            case 'firstName':
+                setFirstName(value);
+                break;
+
+            case 'lastName':
+                setLastName(value);
                 break;
         }
     }
+
+
+    const submit = () => {
+
+        const caller = location.pathname;
+
+        if (caller.includes('email')) {
+            if (/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)) {
+                history.push('/sign-up/password');
+            }
+        }
+
+        if (caller.includes('password')) {
+            history.push('/sign-up/name');
+        }
+
+        if (caller.includes('name')) {
+        }
+
+    }
+
+
+    useEnterPress(setSubmit);
+
+    useEffect(() => {
+        if (submitState) {
+            submit();
+            setSubmit(false);
+        }
+    }, [submitState]);
+
 
     return (
         <div className="sign-up">
             <div className="sign-up__panel">
                 <Switch>
-                    <Route path="/sign-up/email" exact render={() => <EmailPanel next={next} email={email} />} />
-                    <Route path="/sign-up/password" render={() => <PasswordPanel next={next} />} />
+                    <Route path="/sign-up/email" exact render={() => <EmailPanel submit={submit} email={email} onChange={onChange} />} />
+                    <Route path="/sign-up/password" render={() => <PasswordPanel submit={submit} />} />
+                    <Route path="/sign-up/name" render={() => <NamePanel firstName={firstName} lastName={lastName} submit={submit} onChange={onChange} />} />
                     <Redirect to="/sign-up/email" />
                 </Switch>
             </div>
@@ -50,56 +88,50 @@ export const SignUp = () => {
 }
 
 const NamePanel = (props) => {
+    const { onChange, submit, firstName, lastName } = props;
+
     return (
         <div className="password-panel">
             <div className="form-section" >
-                <div><FontAwesomeIcon icon={faKey} /></div>
-                <p>Set a password</p>
-                <input type="password" placeholder="Enter a password here" />
-                <span>You'll log in using it</span>
+                <div><FontAwesomeIcon icon={faUser} /></div>
+                <p>What's your name?</p>
+                <input type="text" name="firstName" placeholder="First name" value={firstName} onChange={onChange} />
+                <input type="text" name="lastName" placeholder="Last name" value={lastName} onChange={onChange} />
+                <span>Using your real name helps others find you online</span>
             </div>
-            <button className="btn" onClick={() => props.next()}>Next</button>
+            <button className="btn" onClick={() => submit()}>Next</button>
         </div>
     )
 }
 
 const PasswordPanel = (props) => {
+    const { onChange, submit, password } = props;
+
     return (
         <div className="password-panel">
             <div className="form-section" >
                 <div><FontAwesomeIcon icon={faKey} /></div>
                 <p>Set a password</p>
-                <input type="password" placeholder="Enter a password here" />
+                <input type="password" name="password" placeholder="Enter a password here" value={password} onChange={onChange} />
                 <span>You'll log in using it</span>
             </div>
-            <button className="btn" onClick={() => props.next()}>Next</button>
+            <button className="btn" onClick={() => submit()}>Next</button>
         </div>
     )
 }
 
 const EmailPanel = (props) => {
-
-    const [email, setEmail] = useState('');
-
-    /** Handle email submission */
-    const submitEmail = () => {
-        const emailIsValid = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
-        emailIsValid && props.next('email', { email });
-    };
-
-    /** Handle on change and enter key press */
-    const onChange = (event) => setEmail(event.target.value);
-    useEnterPress() && submitEmail();
+    const { email, onChange, submit } = props;
 
     return (
         <div className="email-panel">
             <div className="form-section" >
                 <div><FontAwesomeIcon icon={faEnvelope} /></div>
                 <p>Sign up using your email</p>
-                <input type="email" placeholder="Enter your email here" value={email || props.email} onChange={onChange} />
+                <input type="email" name="email" placeholder="Enter your email here" value={email} onChange={onChange} />
                 <span>We'll send a confirmation email here later</span>
             </div>
-            <button className="btn" onClick={() => submitEmail()}>Next</button>
+            <button className="btn" onClick={() => submit()}>Next</button>
         </div>
     )
 }

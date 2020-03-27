@@ -1,27 +1,23 @@
 import { useEffect, useState } from 'react';
 
 /** Executes a provided function when enter key is pressed */
-export const useEnterPress = () => {
-
-    const [enterPressed, setPressed] = useState(null);
+export const useEnterPress = (updateOnEnter) => {
+    
+    const keyPressListener = ({ code }) => {
+        if (code === "Enter" || code === "NumpadEnter") {
+            updateOnEnter(true);
+        }
+    };
 
     useEffect(() => {
-        const listener = event => {
-            if (event.code === "Enter" || event.code === "NumpadEnter") {
-                setPressed(true);
-            }
-        };
-
         // Set up listener
-        document.addEventListener("keydown", listener);
+        document.addEventListener('keydown', keyPressListener);
 
         // Remove listener on unmount
         return () => {
-            document.removeEventListener("keydown", listener);
+            document.removeEventListener('keydown', keyPressListener);
         };
     }, []);
-
-    return enterPressed;
 }
 
 /** */
