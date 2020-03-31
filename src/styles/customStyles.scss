@@ -1,0 +1,19 @@
+input {
+  height: 40px;
+
+  white-space: initial;
+
+  border: 1px solid rgb(180, 180, 180);
+}
+
+textarea,
+input,
+button {
+  font-family: $font;
+  border-radius: $border_radius;
+  padding: 10px 10px;
+  box-sizing: border-box;
+}
+textarea {
+  resize: none;
+}

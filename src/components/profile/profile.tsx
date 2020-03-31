@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { ProfileCard } from './profileCard/profileCard';
-import { ProfileBody } from './profileBody/profileBody';
+import { ProfileCard } from './profileCard';
+import { ProfileBody } from './profileBody';
 
 export const Profile = () => {
 

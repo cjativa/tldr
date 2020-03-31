@@ -94,12 +94,12 @@ const NamePanel = (props) => {
         <div className="password-panel">
             <div className="form-section" >
                 <div><FontAwesomeIcon icon={faUser} /></div>
-                <p>What's your name?</p>
+                <p>Almost there! Just enter your name</p>
                 <input type="text" name="firstName" placeholder="First name" value={firstName} onChange={onChange} />
                 <input type="text" name="lastName" placeholder="Last name" value={lastName} onChange={onChange} />
                 <span>Using your real name helps others find you online</span>
             </div>
-            <button className="btn" onClick={() => submit()}>Next</button>
+            <button className="btn" onClick={() => submit()}>Finish</button>
         </div>
     )
 }

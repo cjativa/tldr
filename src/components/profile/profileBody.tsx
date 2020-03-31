@@ -10,7 +10,7 @@ const paragraphs = [
 const passions = ['Technology', 'Politics', 'Engineering', 'Reading', 'Art', 'Music'];
 const skills = ['React', 'Amazon Web Services', ' TypeScript', 'NodeJS', 'Python', 'Ruby on Rails', 'MySQL', 'Elastic Search'];
 
-const activities = "Catch me playing the guitar when I'm not doing some coding!";
+const ending = "Catch me playing the guitar when I'm not doing some coding!";
 
 const work = "The Barnes Foundation";
 const education = "Stony Brook University";
@@ -43,7 +43,7 @@ export const ProfileBody = (props) => {
                 </ul>
 
                 {/** Activities section */}
-                {activities && <p>{activities}</p>}
+                {ending && <p>{ending}</p>}
 
                 {/** Work and Education section */}
                 <div className="content__professional"></div>

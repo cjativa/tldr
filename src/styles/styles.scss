@@ -1,4 +1,5 @@
 @import "./variables.scss";
+@import "./customStyles.scss";
 @import "./imports.scss";
 
 body {
@@ -8,6 +9,7 @@ body {
 
 p, li, ul {
   margin: 0;
+  padding: 0;
 }
 
 a, a:visited {
