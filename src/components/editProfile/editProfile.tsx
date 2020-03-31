@@ -120,7 +120,7 @@ const More = () => {
                     <input type="text" name="interests" placeholder="Add your interests and passions" {...bindInterests} />
                     {interests.length > 0 &&
                         <ul>
-                            {interests.map((interest) => <li>{interest}</li>)}
+                            {interests.map((interest, index) => <li key={index}>{interest}</li>)}
                         </ul>
                     }
                 </div>
@@ -132,7 +132,7 @@ const More = () => {
                     <input type="text" name="skills" placeholder="Add some of your skills and talents" {...bindSkills} />
                     {skills.length > 0 &&
                         <ul>
-                            {skills.map((skill) => <li>{skill}</li>)}
+                            {skills.map((skill, index) => <li key={index}>{skill}</li>)}
                         </ul>
                     }
                 </div>
