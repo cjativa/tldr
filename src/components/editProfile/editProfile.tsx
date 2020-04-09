@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Switch, Route, Redirect } from 'react-router-dom';
-import { useEnterPress, useOnInput } from '../../shared/customHooks';
+import { useAPIRequest, useOnInput } from '../../shared/customHooks';
 
 export const EditProfile = () => {
 
     const menuLinks = [
         { primaryText: 'About', subText: 'Tell others what you\'re all about', slug: 'about', component: About },
-        { primaryText: 'More Details', subText: 'Add your interests, profession, and more', slug: 'more', component: More },
+        { primaryText: 'More Details', subText: 'Add your interests, skills, and more', slug: 'more', component: More },
         { primaryText: 'Connections', subText: 'Link to your social profiles', slug: 'connections', component: Connections }
-    ]
+    ];
 
     return (
         <div className="edit-profile">
@@ -39,28 +39,58 @@ export const EditProfile = () => {
 }
 
 const About = () => {
+
+    const [titles, modifyTitles] = useState([]);
+
+    const addTitle = () => {
+        modifyTitles([...titles, title]);
+        resetTitles();
+    }
+
+    const saveInformation = () => {
+        console.log(`Titles to save`, titles);
+        console.log(`Heading to save`, heading);
+    }
+
+    const { value: title, bind: bindTitles, reset: resetTitles } = useOnInput('', addTitle);
+    const { value: heading, bind: bindHeading, reset: resetHeading } = useOnInput('');
+
     return (
         <div className="about">
             <p>About</p>
             <div className="about__sections">
+
                 {/** Title section */}
                 <div className="about__section">
                     <p>Title(s)</p>
                     <p className="subtitle">Add up to three titles that describe who you are and what you do.</p>
-                    <input type="text" placeholder="Journalist extraordinaire..." />
+                    <input type="text" name="titles" placeholder="Journalist extraordinaire..." {...bindTitles} />
+                    {titles.length > 0 &&
+                        <ul>
+                            {titles.map((title, index) => <li key={index}>{title}</li>)}
+                        </ul>
+                    }
                 </div>
+
                 {/** Headline section */}
                 <div className="about__section">
                     <p>Headline</p>
                     <p className="subtitle">A brief, descriptive sentence detailing what you do, your mission, or purpose.</p>
-                    <textarea rows={2} placeholder="A journalist by day, technology conniseur by night, endeavoring to have a meaningful impact through insightful reporting on day-to-day matters." />
+                    <textarea rows={2} {...bindHeading} placeholder="A journalist by day, technology conniseur by night, endeavoring to have a meaningful impact through insightful reporting on day-to-day matters." />
                 </div>
+
                 {/** Summary section */}
                 <div className="about__section">
                     <p>Summary</p>
                     <p className="subtitle">Start with one of the suggestions below or make it your own.</p>
                     <div></div>
                 </div>
+
+                {/** Save button */}
+                <div className="about__section save">
+                    <button onClick={saveInformation}>Save</button>
+                </div>
+
             </div>
         </div>
     )
@@ -84,11 +114,6 @@ const More = () => {
 
     const { value: interest, bind: bindInterests, reset: resetInterest } = useOnInput('', addInterest);
     const { value: skill, bind: bindSkills, reset: resetSkill } = useOnInput('', addSkill);
-
-
-
-
-
 
 
     return (
@@ -135,6 +160,11 @@ const More = () => {
                             {skills.map((skill, index) => <li key={index}>{skill}</li>)}
                         </ul>
                     }
+                </div>
+
+                {/** Save button */}
+                <div className="more__section save">
+                    <button>Save</button>
                 </div>
 
             </div>
